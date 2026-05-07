@@ -345,3 +345,260 @@ button {
   font-weight: 400;
   letter-spacing: -2px;
 }
+
+.analysis-title {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 400;
+  letter-spacing: -2px;
+}
+
+.analysis-options {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.analysis-option {
+  border: 1px solid #1a1a1a;
+  padding: 14px 20px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.analysis-option:hover {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.upload-zone {
+  position: relative;
+  width: min(520px, 86vw);
+  height: min(520px, 86vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.upload-label {
+  position: relative;
+  z-index: 3;
+  width: 260px;
+  height: 260px;
+  border: 1px solid #1a1a1a;
+  background: #f8f8f8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: center;
+}
+
+.upload-plus {
+  font-size: 42px;
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.upload-label strong {
+  font-size: 12px;
+  letter-spacing: 1.3px;
+}
+
+.upload-label small {
+  margin-top: 8px;
+  font-size: 10px;
+  color: #777;
+}
+
+.upload-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.upload-filename {
+  margin-top: -32px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #555;
+}
+
+.upload-error {
+  margin-top: 16px;
+}
+
+.results-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1a1a1a;
+  padding: 120px 32px 100px;
+}
+
+.results-layout {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+  gap: 40px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.results-sidebar {
+  border-right: 1px solid #e5e5e5;
+  padding-right: 28px;
+}
+
+.results-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  margin-bottom: 18px;
+}
+
+.results-sidebar h1 {
+  font-size: clamp(38px, 5vw, 64px);
+  font-weight: 400;
+  letter-spacing: -2px;
+  line-height: 0.95;
+}
+
+.results-subtitle {
+  margin-top: 18px;
+  color: #666;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.selected-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.selected-block {
+  text-align: left;
+  border: 1px solid #d8d8d8;
+  padding: 16px;
+  background: #f8f8f8;
+}
+
+.selected-block--active {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.selected-block span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  margin-bottom: 8px;
+  opacity: 0.7;
+}
+
+.selected-block strong {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.scores-panel {
+  border: 1px solid #e5e5e5;
+  min-height: 560px;
+}
+
+.scores-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.scores-header h2 {
+  font-size: 18px;
+  letter-spacing: 1.5px;
+}
+
+.scores-header span {
+  font-size: 11px;
+  font-weight: 700;
+  color: #777;
+  letter-spacing: 1.2px;
+}
+
+.scores-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.score-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e5e5;
+  text-align: left;
+}
+
+.score-row:hover,
+.score-row--active {
+  background: #1a1a1a;
+  color: #ffffff;
+}
+
+.score-row span {
+  font-size: 15px;
+}
+
+.score-row strong {
+  font-size: 15px;
+}
+
+.results-empty {
+  min-height: calc(100vh - 220px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.results-empty h1 {
+  font-size: 42px;
+  font-weight: 400;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 850px) {
+  .analysis-options {
+    flex-direction: column;
+  }
+
+  .results-page {
+    padding: 100px 20px 100px;
+  }
+
+  .results-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .results-sidebar {
+    border-right: none;
+    padding-right: 0;
+  }
+
+  .selected-blocks {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+
+  .scores-panel {
+    min-height: auto;
+  }
+}

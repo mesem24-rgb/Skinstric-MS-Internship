@@ -11,14 +11,24 @@ export default function AnalysisPage() {
       </header>
 
       <section className="testing__content">
-        <p className="testing__eyebrow">PHASE 1 COMPLETE</p>
+        <p className="testing__eyebrow">A.I. ANALYSIS</p>
 
         <div className="input-wrap">
           <div className="input-diamond input-diamond--one"></div>
           <div className="input-diamond input-diamond--two"></div>
           <div className="input-diamond input-diamond--three"></div>
 
-          <h1 className="analysis-title">Initializing Analysis</h1>
+          <h1 className="analysis-title">Choose Image Method</h1>
+
+          <div className="analysis-options">
+            <Link href="/upload" className="analysis-option">
+              UPLOAD IMAGE
+            </Link>
+
+            <Link href="/selfie" className="analysis-option">
+              TAKE SELFIE
+            </Link>
+          </div>
         </div>
 
         <div className="page-actions">
@@ -27,8 +37,8 @@ export default function AnalysisPage() {
             BACK
           </Link>
 
-          <Link href="/" className="nav-btn">
-            HOME
+          <Link href="/upload" className="nav-btn">
+            PROCEED
             <span className="diamond"></span>
           </Link>
         </div>
