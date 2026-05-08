@@ -1,23 +1,20 @@
 import Link from "next/link";
+import Header from "./components/Header";
+import Diamond from "./components/Diamond";
 
 export default function Home() {
   return (
-    <main className="home">
-      <header className="topbar">
-        <div className="brand">SKINSTRIC</div>
-        <div className="intro">INTRO</div>
-      </header>
+    <main className="skin-page">
+      <Header section="INTRO" />
 
-      <section className="hero">
-        <button className="side-cta side-cta--left">
-          <span className="diamond"></span>
+      <section className="home-hero">
+        <button className="hero-side hero-side--left">
+        
+          <span className="arrow-left">▶</span>
           DISCOVER A.I.
         </button>
 
-        <div className="hero__center">
-          <div className="hero__diamond hero__diamond--one"></div>
-          <div className="hero__diamond hero__diamond--two"></div>
-          <div className="hero__diamond hero__diamond--three"></div>
+        <div className="hero-center">
 
           <h1>
             Sophisticated
@@ -25,20 +22,18 @@ export default function Home() {
             skincare
           </h1>
 
-          <Link href="/testing" className="enter-btn">
+          <Link href="/testing" className="primary-link">
             ENTER EXPERIENCE
           </Link>
         </div>
 
-        <Link href="/testing" className="side-cta side-cta--right">
-          TAKE TEST
-          <span className="diamond"></span>
+        <Link href="/testing" className="hero-side hero-side--right">
+          TAKE TEST <span>▶</span>
         </Link>
       </section>
 
-      <p className="caption">
-        SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALISED ROUTINE
-        TAILORED TO WHAT YOUR SKIN NEEDS.
+      <p className="home-copy">
+        SKINSTRIC DEVELOPED AN A.I. THAT CREATES A HIGHLY-PERSONALED ROUTINE TAILORED TO WHAT YOUR SKIN NEEDS.
       </p>
     </main>
   );

@@ -1,7 +1,7 @@
 * {
   box-sizing: border-box;
-  padding: 0;
   margin: 0;
+  padding: 0;
 }
 
 html,
@@ -10,6 +10,11 @@ body {
   background: #ffffff;
   color: #1a1a1a;
   font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+body {
+  position: relative;
 }
 
 a {
@@ -18,17 +23,45 @@ a {
 }
 
 button,
-input {
+input,
+textarea {
   font: inherit;
 }
 
 button {
-  border: none;
   background: transparent;
+  border: none;
   cursor: pointer;
 }
 
-.topbar {
+img {
+  max-width: 100%;
+  display: block;
+}
+
+
+
+/* =========================================================
+   PAGE FOUNDATIONS
+========================================================= */
+
+.skin-page,
+.testing,
+.results-page {
+  min-height: 100vh;
+  background: #ffffff;
+  color: #1a1a1a;
+  position: relative;
+  overflow: hidden;
+}
+
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.skin-header {
   position: fixed;
   top: 0;
   left: 0;
@@ -37,146 +70,154 @@ button {
   padding: 24px 32px;
   display: flex;
   align-items: center;
-  gap: 18px;
-  z-index: 20;
+  z-index: 100;
 }
 
-.brand {
+.skin-logo {
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.8px;
 }
 
-.intro {
+.skin-header__divider {
+  width: 1px;
+  height: 16px;
+  background: #cfcfcf;
+  margin: 0 16px;
+}
+
+.skin-header__section {
   font-size: 11px;
-  color: #6f6f6f;
-  border-left: 1px solid #c7c7c7;
-  padding-left: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #727272;
 }
 
-.home,
-.testing {
-  min-height: 100vh;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.hero__center {
-  position: relative;
-  width: min(620px, 90vw);
-  height: min(620px, 90vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
-.hero h1 {
-  position: relative;
-  z-index: 2;
-  font-size: clamp(52px, 8vw, 112px);
-  font-weight: 400;
-  line-height: 0.92;
-  text-align: center;
-  letter-spacing: -5px;
-}
-
-.hero__diamond,
-.input-diamond {
-  position: absolute;
-  border: 1px dotted #a9a9a9;
-  transform: rotate(45deg);
-  pointer-events: none;
-}
-
-.hero__diamond--one {
-  width: 390px;
-  height: 390px;
-}
-
-.hero__diamond--two {
-  width: 480px;
-  height: 480px;
-  opacity: 0.7;
-}
-
-.hero__diamond--three {
-  width: 570px;
-  height: 570px;
-  opacity: 0.45;
-}
-
-.enter-btn {
-  position: relative;
-  z-index: 3;
-  margin-top: 34px;
-  font-size: 11px;
+.skin-code-btn {
+  margin-left: auto;
+  background: #1a1a1a;
+  color: #ffffff;
+  padding: 9px 14px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 1.2px;
 }
 
-.side-cta,
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 1.4px;
-  color: #1a1a1a;
-}
 
-.side-cta {
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 5;
-}
 
-.side-cta--left {
-  left: 32px;
-}
+/* =========================================================
+   LANDING PAGE
+========================================================= */
 
-.side-cta--right {
-  right: 32px;
-}
-
-.diamond {
-  width: 34px;
-  height: 34px;
-  border: 1px solid #1a1a1a;
-  transform: rotate(45deg);
-  display: inline-block;
-  position: relative;
-}
-
-.caption {
-  position: fixed;
-  left: 32px;
-  bottom: 28px;
-  max-width: 320px;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 1.6;
-  color: #555;
-  letter-spacing: 0.5px;
-}
-
-.testing__content {
+.home-hero {
   min-height: 100vh;
-  padding: 120px 32px 88px;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  position: relative;
+}
+
+.hero-center {
+  width: min(660px, 92vw);
+  height: min(660px, 92vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
   flex-direction: column;
+}
+
+.hero-center h1 {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+  font-size: clamp(58px, 8vw, 120px);
+  line-height: 0.9;
+  font-weight: 400;
+  letter-spacing: -5px;
+}
+
+.primary-link {
+  position: relative;
+  z-index: 5;
+  margin-top: 34px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.4px;
+}
+
+.home-copy {
+  position: fixed;
+  left: 32px;
+  bottom: 82px;
+  width: 330px;
+  font-size: 11px;
+  line-height: 1.55;
+  color: #595959;
+}
+
+
+
+/* =========================================================
+   DIAMOND SYSTEM
+========================================================= */
+
+.diamond-stack {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+}
+
+.diamond-stack span {
+  position: absolute;
+  border: 1px dotted #9f9f9f;
+  transform: rotate(45deg);
+  animation: diamondRotate 12s linear infinite;
+}
+
+.diamond-stack span:nth-child(1) {
+  width: 390px;
+  height: 390px;
+}
+
+.diamond-stack span:nth-child(2) {
+  width: 490px;
+  height: 490px;
+  opacity: 0.65;
+  animation-direction: reverse;
+}
+
+.diamond-stack span:nth-child(3) {
+  width: 590px;
+  height: 590px;
+  opacity: 0.4;
+}
+
+@keyframes diamondRotate {
+  from {
+    transform: rotate(45deg);
+  }
+
+  to {
+    transform: rotate(405deg);
+  }
+}
+
+
+
+/* =========================================================
+   TESTING / ANALYSIS / SELFIE LAYOUT
+========================================================= */
+
+.testing__content {
+  min-height: 100vh;
+  padding: 120px 32px 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }
 
 .testing__eyebrow {
@@ -185,10 +226,12 @@ button {
   left: 32px;
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.8px;
+  letter-spacing: 1.3px;
 }
 
-.input-wrap {
+.input-wrap,
+.upload-zone,
+.selfie-frame {
   position: relative;
   width: min(520px, 86vw);
   height: min(520px, 86vw);
@@ -196,6 +239,20 @@ button {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+
+
+/* =========================================================
+   INPUT DIAMONDS
+========================================================= */
+
+.input-diamond {
+  position: absolute;
+  border: 1px dotted #a5a5a5;
+  transform: rotate(45deg);
+  pointer-events: none;
+  animation: diamondRotate 12s linear infinite;
 }
 
 .input-diamond--one {
@@ -207,6 +264,7 @@ button {
   width: 390px;
   height: 390px;
   opacity: 0.65;
+  animation-direction: reverse;
 }
 
 .input-diamond--three {
@@ -215,14 +273,20 @@ button {
   opacity: 0.4;
 }
 
+
+
+/* =========================================================
+   FORM INPUTS
+========================================================= */
+
 .input-wrap label {
   position: relative;
   z-index: 2;
+  margin-bottom: 12px;
   font-size: 11px;
   font-weight: 700;
-  color: #8a8a8a;
   letter-spacing: 1.3px;
-  margin-bottom: 12px;
+  color: #8a8a8a;
 }
 
 .input-wrap input {
@@ -230,121 +294,24 @@ button {
   z-index: 2;
   width: min(360px, 80vw);
   border: none;
-  outline: none;
   border-bottom: 1px solid #1a1a1a;
-  text-align: center;
-  font-size: clamp(28px, 5vw, 48px);
-  font-weight: 400;
-  letter-spacing: -1.5px;
+  outline: none;
   background: transparent;
   padding: 8px 0 14px;
+  text-align: center;
+  font-size: clamp(28px, 5vw, 48px);
+  letter-spacing: -1.5px;
 }
 
 .input-wrap input::placeholder {
   color: #1a1a1a;
-  opacity: 1;
 }
 
-.form-error {
-  margin-top: -40px;
-  color: #b00020;
-  font-size: 13px;
-  font-weight: 700;
-}
 
-.page-actions {
-  position: fixed;
-  left: 32px;
-  right: 32px;
-  bottom: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 
-.nav-btn:disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-@media (max-width: 768px) {
-  .topbar {
-    padding: 20px;
-  }
-
-  .side-cta {
-    top: auto;
-    bottom: 28px;
-    transform: none;
-  }
-
-  .side-cta--left {
-    display: none;
-  }
-
-  .side-cta--right {
-    right: 20px;
-  }
-
-  .caption {
-    left: 20px;
-    bottom: 92px;
-    max-width: 250px;
-  }
-
-  .hero__diamond--one {
-    width: 280px;
-    height: 280px;
-  }
-
-  .hero__diamond--two {
-    width: 360px;
-    height: 360px;
-  }
-
-  .hero__diamond--three {
-    width: 440px;
-    height: 440px;
-  }
-
-  .hero h1 {
-    letter-spacing: -3px;
-  }
-
-  .testing__eyebrow {
-    left: 20px;
-    right: 20px;
-    text-align: left;
-  }
-
-  .input-diamond--one {
-    width: 240px;
-    height: 240px;
-  }
-
-  .input-diamond--two {
-    width: 320px;
-    height: 320px;
-  }
-
-  .input-diamond--three {
-    width: 400px;
-    height: 400px;
-  }
-
-  .page-actions {
-    left: 20px;
-    right: 20px;
-  }
-}
-
-.analysis-title {
-  position: relative;
-  z-index: 2;
-  font-size: clamp(36px, 6vw, 64px);
-  font-weight: 400;
-  letter-spacing: -2px;
-}
+/* =========================================================
+   ANALYSIS OPTIONS
+========================================================= */
 
 .analysis-title {
   position: relative;
@@ -368,22 +335,22 @@ button {
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.3px;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition: background-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
 }
 
 .analysis-option:hover {
   background: #1a1a1a;
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
-.upload-zone {
-  position: relative;
-  width: min(520px, 86vw);
-  height: min(520px, 86vw);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
+
+/* =========================================================
+   UPLOAD PAGE
+========================================================= */
 
 .upload-label {
   position: relative;
@@ -392,11 +359,11 @@ button {
   height: 260px;
   border: 1px solid #1a1a1a;
   background: #f8f8f8;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  overflow: hidden;
   cursor: pointer;
   text-align: center;
 }
@@ -415,7 +382,7 @@ button {
 .upload-label small {
   margin-top: 8px;
   font-size: 10px;
-  color: #777;
+  color: #777777;
 }
 
 .upload-preview {
@@ -428,26 +395,63 @@ button {
   margin-top: -32px;
   font-size: 12px;
   font-weight: 700;
-  color: #555;
+  color: #555555;
 }
 
-.upload-error {
-  margin-top: 16px;
+
+
+/* =========================================================
+   SELFIE PAGE
+========================================================= */
+
+.selfie-content {
+  padding-bottom: 130px;
 }
+
+.camera-card {
+  position: relative;
+  z-index: 3;
+  width: min(320px, 72vw);
+  height: min(320px, 72vw);
+  border: 1px solid #1a1a1a;
+  overflow: hidden;
+  background: #f8f8f8;
+}
+
+.camera-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-preview--live {
+  transform: scaleX(-1);
+}
+
+.selfie-controls {
+  display: flex;
+  gap: 16px;
+  margin-top: -24px;
+  position: relative;
+  z-index: 4;
+}
+
+
+
+/* =========================================================
+   RESULTS PAGE
+========================================================= */
 
 .results-page {
-  min-height: 100vh;
-  background: #ffffff;
-  color: #1a1a1a;
   padding: 120px 32px 100px;
 }
 
 .results-layout {
+  max-width: 1180px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 40px;
-  max-width: 1180px;
-  margin: 0 auto;
 }
 
 .results-sidebar {
@@ -456,24 +460,35 @@ button {
 }
 
 .results-eyebrow {
+  margin-bottom: 18px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 1.3px;
-  margin-bottom: 18px;
 }
 
 .results-sidebar h1 {
-  font-size: clamp(38px, 5vw, 64px);
+  font-size: clamp(40px, 5vw, 66px);
+  line-height: 0.95;
   font-weight: 400;
   letter-spacing: -2px;
-  line-height: 0.95;
 }
 
 .results-subtitle {
   margin-top: 18px;
-  color: #666;
   font-size: 13px;
-  line-height: 1.5;
+  line-height: 1.6;
+  color: #666666;
+}
+
+.results-preview-wrap {
+  margin-top: 32px;
+}
+
+.results-preview {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border: 1px solid #e5e5e5;
 }
 
 .selected-blocks {
@@ -488,6 +503,8 @@ button {
   border: 1px solid #d8d8d8;
   padding: 16px;
   background: #f8f8f8;
+  transition: background-color 180ms ease,
+    color 180ms ease;
 }
 
 .selected-block--active {
@@ -497,9 +514,9 @@ button {
 
 .selected-block span {
   display: block;
+  margin-bottom: 8px;
   font-size: 10px;
   letter-spacing: 1.2px;
-  margin-bottom: 8px;
   opacity: 0.7;
 }
 
@@ -508,17 +525,23 @@ button {
   font-weight: 500;
 }
 
+
+
+/* =========================================================
+   SCORES PANEL
+========================================================= */
+
 .scores-panel {
   border: 1px solid #e5e5e5;
   min-height: 560px;
 }
 
 .scores-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 24px;
   border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .scores-header h2 {
@@ -529,8 +552,8 @@ button {
 .scores-header span {
   font-size: 11px;
   font-weight: 700;
-  color: #777;
   letter-spacing: 1.2px;
+  color: #777777;
 }
 
 .scores-list {
@@ -539,12 +562,14 @@ button {
 }
 
 .score-row {
+  padding: 18px 24px;
+  border-bottom: 1px solid #e5e5e5;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 24px;
-  border-bottom: 1px solid #e5e5e5;
   text-align: left;
+  transition: background-color 180ms ease,
+    color 180ms ease;
 }
 
 .score-row:hover,
@@ -553,37 +578,199 @@ button {
   color: #ffffff;
 }
 
-.score-row span {
-  font-size: 15px;
-}
-
-.score-row strong {
-  font-size: 15px;
-}
-
-.results-empty {
-  min-height: calc(100vh - 220px);
+.score-left {
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
+  gap: 18px;
 }
 
-.results-empty h1 {
-  font-size: 42px;
-  font-weight: 400;
-  margin-bottom: 24px;
+.score-rank {
+  font-size: 12px;
+  opacity: 0.55;
 }
+
+.score-label {
+  font-size: 15px;
+}
+
+.score-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.score-bar {
+  width: 180px;
+  height: 5px;
+  background: rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.score-bar__fill {
+  height: 100%;
+  background: currentColor;
+}
+
+
+
+/* =========================================================
+   NAVIGATION BUTTONS
+========================================================= */
+
+.page-actions {
+  position: fixed;
+  left: 32px;
+  right: 32px;
+  bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 40;
+}
+
+.nav-btn,
+.hero-side {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  transition: transform 180ms ease;
+}
+
+.nav-btn:hover,
+.hero-side:hover {
+  transform: translateY(-2px);
+}
+
+.nav-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+
+
+/* =========================================================
+   BUTTON DIAMONDS / ARROWS
+========================================================= */
+
+.diamond {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #1a1a1a;
+  transform: rotate(45deg);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: transform 180ms ease,
+    background-color 180ms ease;
+}
+
+.nav-btn:hover .diamond,
+.hero-side:hover .diamond {
+  background: #1a1a1a;
+  transform: rotate(45deg) scale(1.08);
+}
+
+.diamond::after {
+  content: "›";
+  position: absolute;
+  font-size: 22px;
+  line-height: 1;
+  color: #1a1a1a;
+  transform: rotate(-45deg);
+  transition: color 180ms ease;
+}
+
+.nav-btn:hover .diamond::after,
+.hero-side:hover .diamond::after {
+  color: #ffffff;
+}
+
+.nav-btn .diamond:first-child::after,
+.hero-side--left .diamond::after {
+  content: "‹";
+}
+
+
+
+/* =========================================================
+   FORM ERRORS
+========================================================= */
+
+.form-error {
+  margin-top: 16px;
+  color: #b00020;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.upload-error {
+  margin-top: 18px;
+}
+
+
+
+/* =========================================================
+   SKELETON LOADING
+========================================================= */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #ededed;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.7),
+    transparent
+  );
+  animation: skeletonLoading 1.2s infinite;
+}
+
+@keyframes skeletonLoading {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.results-skeleton {
+  width: min(900px, 90vw);
+  margin: 140px auto;
+  display: grid;
+  gap: 16px;
+}
+
+.skeleton-title {
+  width: 260px;
+  height: 48px;
+}
+
+.skeleton-card {
+  height: 86px;
+}
+
+.skeleton-wide {
+  height: 54px;
+}
+
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
 @media (max-width: 850px) {
-  .analysis-options {
-    flex-direction: column;
-  }
-
-  .results-page {
-    padding: 100px 20px 100px;
-  }
-
   .results-layout {
     grid-template-columns: 1fr;
   }
@@ -593,12 +780,79 @@ button {
     padding-right: 0;
   }
 
-  .selected-blocks {
-    display: grid;
-    grid-template-columns: 1fr;
+  .analysis-options {
+    flex-direction: column;
   }
 
-  .scores-panel {
-    min-height: auto;
+  .score-bar {
+    width: 100px;
+  }
+}
+
+@media (max-width: 768px) {
+  .skin-header {
+    padding: 20px;
+  }
+
+  .skin-code-btn {
+    display: none;
+  }
+
+  .hero-center h1 {
+    letter-spacing: -3px;
+  }
+
+  .diamond-stack span:nth-child(1) {
+    width: 280px;
+    height: 280px;
+  }
+
+  .diamond-stack span:nth-child(2) {
+    width: 360px;
+    height: 360px;
+  }
+
+  .diamond-stack span:nth-child(3) {
+    width: 440px;
+    height: 440px;
+  }
+
+  .home-copy {
+    left: 20px;
+    bottom: 86px;
+    width: 260px;
+  }
+
+  .hero-side--left {
+    display: none;
+  }
+
+  .hero-side--right {
+    right: 20px;
+  }
+
+  .testing__eyebrow {
+    left: 20px;
+    right: 20px;
+    text-align: left;
+  }
+
+  .page-actions {
+    left: 20px;
+    right: 20px;
+  }
+
+  .selfie-controls {
+    flex-direction: column;
+    width: min(280px, 80vw);
+  }
+
+  .camera-card {
+    width: min(290px, 76vw);
+    height: min(290px, 76vw);
+  }
+
+  .results-page {
+    padding: 100px 20px 100px;
   }
 }

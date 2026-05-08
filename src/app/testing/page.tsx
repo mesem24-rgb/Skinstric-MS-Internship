@@ -3,6 +3,7 @@
 import { FormEvent, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Header from "../components/Header";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseOne";
@@ -78,14 +79,20 @@ export default function TestingPage() {
 
   return (
     <main className="testing">
-      <header className="topbar">
-        <Link href="/" className="brand">
-          SKINSTRIC
-        </Link>
-        <div className="intro">INTRO</div>
-      </header>
+      <Header section="INTRO" />
 
-      <form className="testing__content" onSubmit={handleSubmit}>
+      <form
+        className="testing__content"
+        onSubmit={(event) => {
+          event.preventDefault();
+
+          if (step === "name") {
+            handleNameProceed();
+          } else {
+            handleSubmit(event);
+          }
+        }}
+      >
         <p className="testing__eyebrow">
           TO START ANALYSIS, PLEASE ENTER YOUR DETAILS
         </p>
@@ -145,7 +152,7 @@ export default function TestingPage() {
           )}
 
           {step === "name" ? (
-            <button type="button" className="nav-btn" onClick={handleNameProceed}>
+            <button type="submit" className="nav-btn">
               PROCEED
               <span className="diamond"></span>
             </button>
