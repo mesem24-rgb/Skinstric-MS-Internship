@@ -20,6 +20,7 @@ export default function TestingPage() {
   const [step, setStep] = useState<"name" | "location">("name");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const handleNameProceed = () => {
     if (!isValidText(name)) {
@@ -33,6 +34,8 @@ export default function TestingPage() {
 
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
+
+    if (submitted || loading) return;
 
     if (!isValidText(name)) {
       setError("Please enter a valid name using letters only.");
@@ -68,7 +71,11 @@ export default function TestingPage() {
         throw new Error("Failed to submit user information.");
       }
 
-      router.push("/analysis");
+      setSubmitted(true);
+
+      setTimeout(() => {
+        router.push("/result");
+      }, 2200);
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
@@ -77,53 +84,64 @@ export default function TestingPage() {
     }
   };
 
+  const handleFormSubmit = (event: FormEvent) => {
+    event.preventDefault();
+
+    if (step === "name") {
+      handleNameProceed();
+      return;
+    }
+
+    handleSubmit(event);
+  };
+
   return (
     <main className="testing">
       <Header section="INTRO" />
 
-      <form
-        className="testing__content"
-        onSubmit={(event) => {
-          event.preventDefault();
-
-          if (step === "name") {
-            handleNameProceed();
-          } else {
-            handleSubmit(event);
-          }
-        }}
-      >
-        <p className="testing__eyebrow">
-          TO START ANALYSIS, PLEASE ENTER YOUR DETAILS
-        </p>
+      <form className="testing__content" onSubmit={handleFormSubmit}>
+        <p className="testing__eyebrow">TO START ANALYSIS</p>
 
         <div className="input-wrap">
           <div className="input-diamond input-diamond--one"></div>
           <div className="input-diamond input-diamond--two"></div>
           <div className="input-diamond input-diamond--three"></div>
 
-          {step === "name" ? (
+          {submitted ? (
+            <div className="testing-success">
+              <h2>Thank you!</h2>
+              <p>Proceed for the next step</p>
+            </div>
+          ) : step === "name" ? (
             <>
               <label htmlFor="name">CLICK TO TYPE</label>
+
               <input
                 id="name"
                 type="text"
                 value={name}
                 autoFocus
                 placeholder="Introduce Yourself"
-                onChange={(e) => setName(e.target.value)}
+                onChange={(event) => {
+                  setName(event.target.value);
+                  setError("");
+                }}
               />
             </>
           ) : (
             <>
               <label htmlFor="location">WHERE ARE YOU FROM?</label>
+
               <input
                 id="location"
                 type="text"
                 value={location}
                 autoFocus
                 placeholder="Your Location"
-                onChange={(e) => setLocation(e.target.value)}
+                onChange={(event) => {
+                  setLocation(event.target.value);
+                  setError("");
+                }}
               />
             </>
           )}
@@ -141,6 +159,7 @@ export default function TestingPage() {
             <button
               type="button"
               className="nav-btn"
+              disabled={submitted || loading}
               onClick={() => {
                 setError("");
                 setStep("name");
@@ -151,17 +170,14 @@ export default function TestingPage() {
             </button>
           )}
 
-          {step === "name" ? (
-            <button type="submit" className="nav-btn">
-              PROCEED
-              <span className="diamond"></span>
-            </button>
-          ) : (
-            <button type="submit" className="nav-btn" disabled={loading}>
-              {loading ? "SENDING..." : "PROCEED"}
-              <span className="diamond"></span>
-            </button>
-          )}
+          <button
+            type="submit"
+            className="nav-btn nav-btn--reverse"
+            disabled={loading || submitted}
+          >
+            {loading ? "SENDING..." : "PROCEED"}
+            <span className="diamond"></span>
+          </button>
         </div>
       </form>
     </main>

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../components/Header";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
@@ -18,7 +19,6 @@ export default function UploadPage() {
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
-
     setError("");
 
     if (!file) return;
@@ -35,9 +35,7 @@ export default function UploadPage() {
     reader.onloadend = () => {
       const result = reader.result as string;
       setPreview(result);
-
-      const base64Only = result.split(",")[1];
-      setBase64Image(base64Only);
+      setBase64Image(result.split(",")[1]);
     };
 
     reader.readAsDataURL(file);
@@ -58,37 +56,29 @@ export default function UploadPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          image: base64Image,
-        }),
+        body: JSON.stringify({ image: base64Image }),
       });
 
-      if (!response.ok) {
-        throw new Error("Image upload failed.");
-      }
+      if (!response.ok) throw new Error("Image upload failed.");
 
       const result = await response.json();
 
       localStorage.setItem("skinstric-analysis", JSON.stringify(result.data));
       localStorage.setItem("skinstric-upload-preview", preview);
 
-      router.push("/results");
+      router.push("/select");
     } catch (err) {
       console.error(err);
       setError("Something went wrong while analyzing your image.");
     } finally {
       setLoading(false);
     }
+    {loading && <div className="skeleton image-skeleton" />}
   };
 
   return (
     <main className="testing">
-      <header className="topbar">
-        <Link href="/" className="brand">
-          SKINSTRIC
-        </Link>
-        <div className="intro">UPLOAD</div>
-      </header>
+      <Header section="UPLOAD" />
 
       <section className="testing__content">
         <p className="testing__eyebrow">UPLOAD YOUR IMAGE</p>
@@ -123,7 +113,7 @@ export default function UploadPage() {
         {error && <p className="form-error upload-error">{error}</p>}
 
         <div className="page-actions">
-          <Link href="/analysis" className="nav-btn">
+          <Link href="/result" className="nav-btn">
             <span className="diamond"></span>
             BACK
           </Link>

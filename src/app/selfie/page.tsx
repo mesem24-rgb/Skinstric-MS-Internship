@@ -116,7 +116,7 @@ export default function SelfiePage() {
       localStorage.setItem("skinstric-analysis", JSON.stringify(result.data));
       localStorage.setItem("skinstric-upload-preview", capturedImage);
 
-      router.push("/results");
+      router.push("/select");
     } catch (err) {
       console.error(err);
       setError("Something went wrong while analyzing your selfie.");
@@ -200,14 +200,14 @@ export default function SelfiePage() {
         </div>
 
         <div className="page-actions">
-          <Link href="/analysis" className="nav-btn">
+          <Link href="/result" className="nav-btn">
             <span className="diamond"></span>
             BACK
           </Link>
 
           <button
             type="button"
-            className="nav-btn"
+            className="nav-btn nav-btn--reverse"
             onClick={submitSelfie}
             disabled={!capturedImage || loading}
           >
