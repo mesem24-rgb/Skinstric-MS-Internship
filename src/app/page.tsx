@@ -52,7 +52,7 @@ export default function Home() {
           <Link href="/testing" className="hero-enter-mobile">
   <span>ENTER EXPERIENCE</span>
   <span className="hero-enter-diamond">
-    <span className="hero-enter-arrow">▶</span>
+    <span className="hero-enter-arrow"> ▶</span>
   </span>
 </Link>
         </div>
