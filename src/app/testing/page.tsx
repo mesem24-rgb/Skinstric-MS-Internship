@@ -151,33 +151,39 @@ export default function TestingPage() {
 
         <div className="page-actions">
           {step === "name" ? (
-            <Link href="/" className="nav-btn">
-              <span className="diamond"></span>
-              BACK
-            </Link>
+            <Link href="/" className="nav-btn nav-btn--back">
+  <span className="nav-diamond">
+    <span className="nav-arrow nav-arrow--left">▶</span>
+  </span>
+  BACK
+</Link>
           ) : (
             <button
-              type="button"
-              className="nav-btn"
-              disabled={submitted || loading}
-              onClick={() => {
-                setError("");
-                setStep("name");
-              }}
-            >
-              <span className="diamond"></span>
-              BACK
-            </button>
+  type="button"
+  className="nav-btn nav-btn--back"
+  disabled={submitted || loading}
+  onClick={() => {
+    setError("");
+    setStep("name");
+  }}
+>
+  <span className="nav-diamond">
+    <span className="nav-arrow nav-arrow--left">▶</span>
+  </span>
+  BACK
+</button>
           )}
 
-          <button
-            type="submit"
-            className="nav-btn nav-btn--reverse"
-            disabled={loading || submitted}
-          >
-            {loading ? "SENDING..." : "PROCEED"}
-            <span className="diamond"></span>
-          </button>
+         <button
+  type="submit"
+  className="nav-btn nav-btn--proceed"
+  disabled={loading || submitted}
+>
+  {loading ? "SENDING..." : "PROCEED"}
+  <span className="nav-diamond">
+    <span className="nav-arrow nav-arrow--right">▶</span>
+  </span>
+</button>
         </div>
       </form>
     </main>

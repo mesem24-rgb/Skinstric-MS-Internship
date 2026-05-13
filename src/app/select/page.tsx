@@ -1,68 +1,66 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import Link from "next/link";
 import Header from "../components/Header";
-import { ImageSkeleton } from "../components/Skeleton";
 
-export default function SelectPage() {
-  const [previewImage, setPreviewImage] = useState("");
-  const [loading, setLoading] = useState(true);
+const items = [
+  { label: "DEMOGRAPHICS", href: "/summary", active: true },
+  { label: "SKIN TYPE DETAILS", href: "#", active: false },
+  { label: "WEATHER", href: "#", active: false },
+  { label: "COSMETIC\nCONCERNS", href: "#", active: false },
+];
 
-  useEffect(() => {
-    const savedPreview = localStorage.getItem("skinstric-upload-preview");
-
-    if (savedPreview) {
-      setPreviewImage(savedPreview);
-    }
-    setLoading(false);
-  }, []);
-
-  {loading ? (
-  <ImageSkeleton />
-) : previewImage ? (
-  <img src={previewImage} alt="Selected preview" className="select-preview" />
-) : (
-  <div className="select-empty">No image selected</div>
-)}
-
+export default function SummaryPage() {
   return (
-    <main className="select-page">
-      <Header section="ANALYSIS" />
+    <main className="summary-page">
+      <Header section="INTRO" />
 
-      <p className="testing__eyebrow">SELECT YOUR IMAGE</p>
+      <section className="summary-layout">
+        <div className="summary-copy">
+          <p className="summary-eyebrow">A.I. ANALYSIS</p>
 
-      <section className="select-content">
-        <div className="select-frame">
-          <div className="input-diamond input-diamond--one"></div>
-          <div className="input-diamond input-diamond--two"></div>
-          <div className="input-diamond input-diamond--three"></div>
-
-          {previewImage ? (
-            <img
-              src={previewImage}
-              alt="Selected preview"
-              className="select-preview"
-            />
-          ) : (
-            <div className="select-empty">No image selected</div>
-          )}
+          <p className="summary-description">
+            A.I. HAS ESTIMATED THE FOLLOWING.
+            <br />
+            FIX ESTIMATED INFORMATION IF NEEDED.
+          </p>
         </div>
 
-        <p className="select-helper">
-          IMAGE ACCEPTED. PROCEED TO VIEW YOUR DEMOGRAPHIC SUMMARY.
-        </p>
+        <div className="summary-diamond-grid">
+          {items.map((item, index) =>
+            item.active ? (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={`summary-diamond summary-diamond--${index} summary-diamond--active`}
+              >
+                <span>{item.label}</span>
+              </Link>
+            ) : (
+              <button
+                key={item.label}
+                type="button"
+                className={`summary-diamond summary-diamond--${index} summary-diamond--locked`}
+                aria-disabled="true"
+              >
+                <span>{item.label}</span>
+              </button>
+            )
+          )}
+        </div>
       </section>
 
       <div className="page-actions">
-        <Link href="/result" className="nav-btn">
-          <span className="diamond"></span>
+        <Link href="/result" className="nav-btn nav-btn--back">
+          <span className="nav-diamond">
+            <span className="nav-arrow nav-arrow--left">▶</span>
+          </span>
           BACK
         </Link>
 
-        <Link href="/loading-analysis" className="nav-btn nav-btn--reverse">
-          PROCEED
-          <span className="diamond"></span>
+        <Link href="/summary" className="nav-btn nav-btn--proceed">
+          GET SUMMARY
+          <span className="nav-diamond">
+            <span className="nav-arrow nav-arrow--right">▶</span>
+          </span>
         </Link>
       </div>
     </main>

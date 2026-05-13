@@ -3,12 +3,14 @@
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import Header from "../components/Header";
 
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
 
 export default function SelfiePage() {
   const router = useRouter();
+
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const streamRef = useRef<MediaStream | null>(null);
@@ -36,6 +38,7 @@ export default function SelfiePage() {
 
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
+        await videoRef.current.play();
         setCameraReady(true);
       }
     } catch (err) {
@@ -74,10 +77,9 @@ export default function SelfiePage() {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
-    const base64Only = dataUrl.split(",")[1];
 
     setCapturedImage(dataUrl);
-    setBase64Image(base64Only);
+    setBase64Image(dataUrl.split(",")[1]);
     stopCamera();
   };
 
@@ -116,7 +118,7 @@ export default function SelfiePage() {
       localStorage.setItem("skinstric-analysis", JSON.stringify(result.data));
       localStorage.setItem("skinstric-upload-preview", capturedImage);
 
-      router.push("/select");
+      router.push("/loading-analysis");
     } catch (err) {
       console.error(err);
       setError("Something went wrong while analyzing your selfie.");
@@ -135,12 +137,7 @@ export default function SelfiePage() {
 
   return (
     <main className="testing">
-      <header className="topbar">
-        <Link href="/" className="brand">
-          SKINSTRIC
-        </Link>
-        <div className="intro">SELFIE</div>
-      </header>
+      <Header section="SELFIE" />
 
       <section className="testing__content selfie-content">
         <p className="testing__eyebrow">TAKE A SELFIE</p>
@@ -173,6 +170,12 @@ export default function SelfiePage() {
 
         {error && <p className="form-error upload-error">{error}</p>}
 
+        {loading && (
+          <div className="selfie-loading">
+            <div className="selfie-loading__bar" />
+          </div>
+        )}
+
         <div className="selfie-controls">
           {!capturedImage ? (
             <button
@@ -181,10 +184,15 @@ export default function SelfiePage() {
               onClick={captureSelfie}
               disabled={!cameraReady}
             >
-              CAPTURE
+              {cameraReady ? "CAPTURE" : "LOADING CAMERA..."}
             </button>
           ) : (
-            <button type="button" className="analysis-option" onClick={retakeSelfie}>
+            <button
+              type="button"
+              className="analysis-option"
+              onClick={retakeSelfie}
+              disabled={loading}
+            >
               RETAKE
             </button>
           )}
@@ -200,19 +208,23 @@ export default function SelfiePage() {
         </div>
 
         <div className="page-actions">
-          <Link href="/result" className="nav-btn">
-            <span className="diamond"></span>
+          <Link href="/result" className="nav-btn nav-btn--back">
+            <span className="nav-diamond">
+              <span className="nav-arrow nav-arrow--left">▶</span>
+            </span>
             BACK
           </Link>
 
           <button
             type="button"
-            className="nav-btn nav-btn--reverse"
+            className="nav-btn nav-btn--proceed"
             onClick={submitSelfie}
             disabled={!capturedImage || loading}
           >
             {loading ? "SENDING..." : "PROCEED"}
-            <span className="diamond"></span>
+            <span className="nav-diamond">
+              <span className="nav-arrow nav-arrow--right">▶</span>
+            </span>
           </button>
         </div>
       </section>

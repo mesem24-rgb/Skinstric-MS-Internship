@@ -32,7 +32,7 @@ export default function ResultPage() {
         >
           <div className="result-diamond result-diamond--one" />
           <div className="result-diamond result-diamond--two" />
-          {/* <div className="result-diamond result-diamond--three" /> */}
+
           <div className="result-node result-node--camera">
             <div className="result-icon">
               <img
@@ -41,9 +41,10 @@ export default function ResultPage() {
                 className="result-icon__image"
               />
             </div>
+
             <div className="result-connector" />
 
-            <p className="result-label result-label--camera">
+            <p className="result-label">
               ALLOW A.I.
               <br />
               TO SCAN YOUR FACE
@@ -54,24 +55,24 @@ export default function ResultPage() {
         <Link href="/upload" className="result-card">
           <div className="result-diamond result-diamond--one" />
           <div className="result-diamond result-diamond--two" />
-          {/* <div className="result-diamond result-diamond--three" /> */}
+
           <div className="result-node result-node--gallery">
-  <div className="result-icon">
-    <img
-      src="/assets/gallery-icon.png"
-      alt="Gallery upload"
-      className="result-icon__image"
-    />
-  </div>
+            <div className="result-icon">
+              <img
+                src="/assets/gallery-icon.png"
+                alt="Gallery upload"
+                className="result-icon__image"
+              />
+            </div>
 
-  <div className="result-connector" />
+            <div className="result-connector" />
 
-  <p className="result-label">
-    ALLOW A.I.
-    <br />
-    ACCESS GALLERY
-  </p>
-</div>
+            <p className="result-label">
+              ALLOW A.I.
+              <br />
+              ACCESS GALLERY
+            </p>
+          </div>
         </Link>
       </section>
 
@@ -108,8 +109,10 @@ export default function ResultPage() {
       )}
 
       <div className="page-actions">
-        <Link href="/testing" className="nav-btn">
-          <span className="diamond"></span>
+        <Link href="/testing" className="nav-btn nav-btn--back">
+          <span className="nav-diamond">
+            <span className="nav-arrow nav-arrow--left">▶</span>
+          </span>
           BACK
         </Link>
       </div>

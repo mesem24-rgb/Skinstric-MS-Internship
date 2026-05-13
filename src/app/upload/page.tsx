@@ -66,7 +66,7 @@ export default function UploadPage() {
       localStorage.setItem("skinstric-analysis", JSON.stringify(result.data));
       localStorage.setItem("skinstric-upload-preview", preview);
 
-      router.push("/select");
+      router.push("/loading-analysis");
     } catch (err) {
       console.error(err);
       setError("Something went wrong while analyzing your image.");

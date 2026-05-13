@@ -9,7 +9,7 @@ export default function LoadingAnalysisPage() {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      router.push("/summary");
+      router.push("/select");
     }, 2600);
 
     return () => clearTimeout(timer);
