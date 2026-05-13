@@ -9,7 +9,13 @@ export default function Home() {
 
   return (
     <main
-      className={`skin-page home ${hoverSide ? `home--hover-${hoverSide}` : ""}`}
+      className={`home ${
+        hoverSide === "left"
+          ? "home--hover-left"
+          : hoverSide === "right"
+          ? "home--hover-right"
+          : ""
+      }`}
     >
       <Header section="INTRO" />
 
