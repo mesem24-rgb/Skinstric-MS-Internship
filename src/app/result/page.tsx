@@ -14,7 +14,7 @@ export default function ResultPage() {
     setCameraLoading(true);
 
     setTimeout(() => {
-      router.push("/selfie");
+      router.push("/camera");
     }, 900);
   };
 

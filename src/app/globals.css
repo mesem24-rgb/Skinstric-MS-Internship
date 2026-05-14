@@ -467,7 +467,7 @@ img {
 }
 
 /* =========================================================
-   TESTING / ANALYSIS / SELFIE LAYOUT
+   TESTING / ANALYSIS / CAMERA LAYOUT
 ========================================================= */
 
 .testing__content {
@@ -499,6 +499,80 @@ img {
   align-items: center;
   justify-content: center;
   flex-direction: column;
+}
+
+.camera-content {
+  padding-bottom: 130px;
+}
+
+.camera-frame {
+  position: relative;
+  width: min(460px, 86vw);
+  height: min(460px, 86vw);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.camera-card--small {
+  position: relative;
+  z-index: 3;
+  width: min(250px, 62vw);
+  height: min(250px, 62vw);
+  border: 1px solid rgba(17, 17, 17, 0.65);
+  overflow: hidden;
+  background: #eeeeee;
+}
+
+.camera-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-preview--live {
+  transform: scaleX(-1);
+}
+
+.camera-instruction {
+  position: relative;
+  z-index: 5;
+  margin-top: -28px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: #555555;
+}
+
+.camera-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 22px;
+  position: relative;
+  z-index: 5;
+}
+
+.camera-action {
+  border: 1px solid rgba(17, 17, 17, 0.65);
+  padding: 12px 18px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  transition:
+    background-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease;
+}
+
+.camera-action:hover:not(:disabled) {
+  background: #111111;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.camera-action:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* =========================================================
@@ -1288,6 +1362,7 @@ img {
   background: #f4f4f2;
   color: #111111;
   padding: 96px 32px 96px;
+
 }
 
 .demographics-hero {
@@ -1759,5 +1834,114 @@ img {
   .camera-card {
     width: min(290px, 76vw);
     height: min(290px, 76vw);
+  }
+
+  .demographics-page {
+    padding: 96px 16px 110px;
+    overflow-y: auto;
+  }
+
+  .demographics-hero {
+    margin-bottom: 32px;
+  }
+
+  .demographics-title {
+    font-size: clamp(44px, 13vw, 64px);
+    line-height: 0.9;
+    letter-spacing: -0.07em;
+  }
+
+  .demographics-subtitle,
+  .demographics-eyebrow {
+    font-size: 10px;
+  }
+
+  .demographics-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    max-width: 100%;
+  }
+
+  .demographics-sidebar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .sidebar-tab {
+    min-height: 74px;
+    padding: 10px;
+  }
+
+  .sidebar-tab span {
+    font-size: 11px;
+    margin-bottom: 12px;
+  }
+
+  .sidebar-tab small {
+    font-size: 8px;
+  }
+
+  .demographics-main {
+    min-height: 360px;
+    padding: 18px;
+  }
+
+  .demographics-selected h2 {
+    font-size: 34px;
+  }
+
+  .demographics-chart {
+    left: 50%;
+    top: 58%;
+  }
+
+  .chart-ring {
+    width: 220px;
+    height: 220px;
+  }
+
+  .chart-ring::before {
+    width: 208px;
+    height: 208px;
+  }
+
+  .chart-ring__inner span {
+    font-size: 30px;
+  }
+
+  .demographics-confidence {
+    min-height: auto;
+  }
+
+  .confidence-header {
+    height: 40px;
+    font-size: 8px;
+  }
+
+  .confidence-row {
+    min-height: 40px;
+  }
+
+  .confidence-row span,
+  .confidence-row strong {
+    font-size: 10px;
+  }
+
+  .page-actions {
+    left: 16px;
+    right: 16px;
+    bottom: 20px;
+  }
+
+  .nav-btn {
+    font-size: 10px;
+    gap: 10px;
+  }
+
+  .nav-diamond {
+    width: 30px;
+    height: 30px;
   }
 }

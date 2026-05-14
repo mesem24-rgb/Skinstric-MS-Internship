@@ -8,7 +8,7 @@ import Header from "../components/Header";
 const API_URL =
   "https://us-central1-api-skinstric-ai.cloudfunctions.net/skinstricPhaseTwo";
 
-export default function SelfiePage() {
+export default function CameraPage() {
   const router = useRouter();
 
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -22,30 +22,47 @@ export default function SelfiePage() {
   const [loading, setLoading] = useState(false);
 
   const startCamera = async () => {
-    try {
-      setError("");
+  try {
+    setError("");
+    setCameraReady(false);
 
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          facingMode: "user",
-          width: { ideal: 720 },
-          height: { ideal: 720 },
-        },
-        audio: false,
-      });
-
-      streamRef.current = stream;
-
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream;
-        await videoRef.current.play();
-        setCameraReady(true);
-      }
-    } catch (err) {
-      console.error(err);
-      setError("Camera access was blocked or unavailable.");
+    if (!navigator.mediaDevices?.getUserMedia) {
+      setError("Camera is not supported in this browser.");
+      return;
     }
-  };
+
+    const stream = await navigator.mediaDevices.getUserMedia({
+      video: {
+        facingMode: "user",
+        width: { ideal: 720 },
+        height: { ideal: 720 },
+      },
+      audio: false,
+    });
+
+    streamRef.current = stream;
+
+    if (videoRef.current) {
+      videoRef.current.srcObject = stream;
+
+      videoRef.current.onloadedmetadata = async () => {
+        try {
+          await videoRef.current?.play();
+          setCameraReady(true);
+          setError("");
+        } catch {
+          setError("Camera loaded, but playback could not start.");
+        }
+      };
+    }
+  } catch (err) {
+    console.error(err);
+    setCameraReady(false);
+    setError(
+      "Camera permission was blocked. Check your browser camera settings and try again."
+    );
+  }
+};
 
   const stopCamera = () => {
     streamRef.current?.getTracks().forEach((track) => track.stop());
@@ -53,45 +70,42 @@ export default function SelfiePage() {
     setCameraReady(false);
   };
 
-  const captureSelfie = () => {
-    if (!videoRef.current || !canvasRef.current) {
-      setError("Camera is not ready yet.");
-      return;
-    }
+  const captureImage = () => {
+  if (!videoRef.current || !canvasRef.current) return;
 
-    const video = videoRef.current;
-    const canvas = canvasRef.current;
+  setError("");
 
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+  const video = videoRef.current;
+  const canvas = canvasRef.current;
+  const context = canvas.getContext("2d");
 
-    const context = canvas.getContext("2d");
+  if (!context) return;
 
-    if (!context) {
-      setError("Unable to capture image.");
-      return;
-    }
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
 
-    context.translate(canvas.width, 0);
-    context.scale(-1, 1);
-    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+  context.translate(canvas.width, 0);
+  context.scale(-1, 1);
+  context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
+  const dataUrl = canvas.toDataURL("image/jpeg", 0.92);
 
-    setCapturedImage(dataUrl);
-    setBase64Image(dataUrl.split(",")[1]);
-    stopCamera();
-  };
+  setCapturedImage(dataUrl);
+  setBase64Image(dataUrl.split(",")[1]);
+  setCameraReady(false);
+  stopCamera();
+};
 
-  const retakeSelfie = () => {
-    setCapturedImage("");
-    setBase64Image("");
-    startCamera();
-  };
+const retakeImage = async () => {
+  setError("");
+  setCapturedImage("");
+  setBase64Image("");
+  await startCamera();
+};
 
-  const submitSelfie = async () => {
+  const submitImage = async () => {
     if (!base64Image) {
-      setError("Please take a selfie before proceeding.");
+      setError("Capture an image before proceeding.");
       return;
     }
 
@@ -101,17 +115,11 @@ export default function SelfiePage() {
     try {
       const response = await fetch(API_URL, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          image: base64Image,
-        }),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ image: base64Image }),
       });
 
-      if (!response.ok) {
-        throw new Error("Selfie upload failed.");
-      }
+      if (!response.ok) throw new Error("Image analysis failed.");
 
       const result = await response.json();
 
@@ -119,9 +127,8 @@ export default function SelfiePage() {
       localStorage.setItem("skinstric-upload-preview", capturedImage);
 
       router.push("/loading-analysis");
-    } catch (err) {
-      console.error(err);
-      setError("Something went wrong while analyzing your selfie.");
+    } catch {
+      setError("Something went wrong while analyzing your image.");
     } finally {
       setLoading(false);
     }
@@ -129,29 +136,26 @@ export default function SelfiePage() {
 
   useEffect(() => {
     startCamera();
-
-    return () => {
-      stopCamera();
-    };
+    return () => stopCamera();
   }, []);
 
   return (
-    <main className="testing">
-      <Header section="SELFIE" />
+    <main className="testing camera-page">
+      <Header section="CAMERA" />
 
-      <section className="testing__content selfie-content">
-        <p className="testing__eyebrow">TAKE A SELFIE</p>
+      <section className="testing__content camera-content">
+        <p className="testing__eyebrow">TAKE PICTURE</p>
 
-        <div className="selfie-frame">
+        <div className="camera-frame">
           <div className="input-diamond input-diamond--one"></div>
           <div className="input-diamond input-diamond--two"></div>
           <div className="input-diamond input-diamond--three"></div>
 
-          <div className="camera-card">
+          <div className="camera-card camera-card--small">
             {capturedImage ? (
               <img
                 src={capturedImage}
-                alt="Captured selfie"
+                alt="Captured face scan"
                 className="camera-preview"
               />
             ) : (
@@ -168,7 +172,11 @@ export default function SelfiePage() {
           <canvas ref={canvasRef} hidden />
         </div>
 
-        {error && <p className="form-error upload-error">{error}</p>}
+        <p className="camera-instruction">
+          CENTER YOUR FACE IN THE FRAME
+        </p>
+
+        {error && !cameraReady && <p className="form-error upload-error">{error}</p>}
 
         {loading && (
           <div className="selfie-loading">
@@ -176,21 +184,21 @@ export default function SelfiePage() {
           </div>
         )}
 
-        <div className="selfie-controls">
+        <div className="camera-controls">
           {!capturedImage ? (
             <button
               type="button"
-              className="analysis-option"
-              onClick={captureSelfie}
+              className="camera-action"
+              onClick={captureImage}
               disabled={!cameraReady}
             >
-              {cameraReady ? "CAPTURE" : "LOADING CAMERA..."}
+              {cameraReady ? "CAPTURE" : "LOADING CAMERA"}
             </button>
           ) : (
             <button
               type="button"
-              className="analysis-option"
-              onClick={retakeSelfie}
+              className="camera-action"
+              onClick={retakeImage}
               disabled={loading}
             >
               RETAKE
@@ -199,11 +207,11 @@ export default function SelfiePage() {
 
           <button
             type="button"
-            className="analysis-option"
-            onClick={submitSelfie}
+            className="camera-action"
+            onClick={submitImage}
             disabled={!capturedImage || loading}
           >
-            {loading ? "ANALYZING..." : "USE SELFIE"}
+            {loading ? "ANALYZING" : "USE IMAGE"}
           </button>
         </div>
 
@@ -218,10 +226,10 @@ export default function SelfiePage() {
           <button
             type="button"
             className="nav-btn nav-btn--proceed"
-            onClick={submitSelfie}
+            onClick={submitImage}
             disabled={!capturedImage || loading}
           >
-            {loading ? "SENDING..." : "PROCEED"}
+            PROCEED
             <span className="nav-diamond">
               <span className="nav-arrow nav-arrow--right">▶</span>
             </span>

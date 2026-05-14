@@ -25,8 +25,8 @@ export default function AnalysisPage() {
               UPLOAD IMAGE
             </Link>
 
-            <Link href="/selfie" className="analysis-option">
-              TAKE SELFIE
+            <Link href="/camera" className="analysis-option">
+              TAKE PICTURE
             </Link>
           </div>
         </div>
