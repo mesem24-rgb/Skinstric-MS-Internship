@@ -542,6 +542,7 @@ img {
   font-weight: 700;
   letter-spacing: 0.08em;
   color: #555555;
+  margin-top: -18px;
 }
 
 .camera-controls {
@@ -550,6 +551,7 @@ img {
   margin-top: 22px;
   position: relative;
   z-index: 5;
+  margin-top: 14px;
 }
 
 .camera-action {
@@ -824,7 +826,7 @@ img {
 .result-node--gallery .result-label {
   position: absolute;
   right: 150px;
-  top: 94px;
+  top: 82px;
   text-align: right;
 }
 
@@ -1189,10 +1191,10 @@ img {
 }
 
 .analysis-loading__content h1 {
-  font-size: 48px;
-  line-height: 0.9;
+  font-size: 58px;
+  line-height: 0.82;
   font-weight: 400;
-  letter-spacing: -0.07em;
+  letter-spacing: -0.08em;
   margin-bottom: 24px;
 }
 
@@ -1214,7 +1216,7 @@ img {
   width: 40%;
   height: 100%;
   background: #111111;
-  animation: analysisProgress 1.2s ease-in-out infinite;
+  animation: analysisProgress 1.6s ease-in-out infinite;
 }
 
 @keyframes analysisRotate {
@@ -1391,7 +1393,7 @@ img {
 .demographics-content {
   display: grid;
   grid-template-columns: 92px minmax(420px, 1fr) 300px;
-  gap: 18px;
+  gap: 20px;
   max-width: 1560px;
 }
 

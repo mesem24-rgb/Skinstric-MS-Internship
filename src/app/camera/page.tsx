@@ -141,7 +141,7 @@ const retakeImage = async () => {
 
   return (
     <main className="testing camera-page">
-      <Header section="CAMERA" />
+      <Header section="INTRO" />
 
       <section className="testing__content camera-content">
         <p className="testing__eyebrow">TAKE PICTURE</p>

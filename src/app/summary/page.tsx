@@ -56,7 +56,7 @@ export default function SummaryPage() {
 
   return (
     <main className="demographics-page">
-      <Header section="DEMOGRAPHICS" />
+      <Header section="INTRO" />
 
       <section className="demographics-hero">
         <p className="demographics-eyebrow">A.I. ANALYSIS</p>
