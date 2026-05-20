@@ -163,7 +163,7 @@ Frontend accessibility considerations included:
 <img width="1907" height="848" alt="Skinstric_LP_pic" src="https://github.com/user-attachments/assets/1da5bace-0932-49dd-b73a-db1b5e386d57" />
 <img width="1891" height="866" alt="Skinstric_page2_pic" src="https://github.com/user-attachments/assets/d8815d0e-e657-4422-bc00-d60a25ad0aae" />
 <img width="1902" height="851" alt="skinstric_page3_pic" src="https://github.com/user-attachments/assets/c58e65ca-3437-4ea4-9734-f21303e0eb23" />
-<img width="1920" height="1020" alt="skinstric_page4_pic" src="https://github.com/user-attachments/assets/3dbec762-eaa9-4406-b428-dd908658e9c2" />
+<img width="1883" height="859" alt="skinstric_page4-pic" src="https://github.com/user-attachments/assets/3a8f2a9f-afb0-4702-8bf6-2db251428128" />
 <img width="1874" height="853" alt="skinstric_page5_pic" src="https://github.com/user-attachments/assets/4fcb8e91-76ea-4e53-94be-e8cc059d6515" />
 
 
